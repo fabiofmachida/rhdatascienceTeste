@@ -4,7 +4,6 @@ from streamlit_folium import folium_static
 import datetime
 from datetime import datetime
 import openpyxl
-from openpyxl import load_workbook
 from PIL import Image
 
 st.set_page_config(page_title="Rh Data Science", page_icon="🎲")
@@ -50,13 +49,12 @@ def criar_banco_dados(dados):
         df = pd.concat([df, novo_df], ignore_index=True)
 
         # Salva o DataFrame atualizado no arquivo Excel
-        with pd.ExcelWriter('dataset/banco_dados.xlsx', engine='openpyxl') as writer:
-            writer.book = load_workbook('dataset/banco_dados.xlsx')
-            df.to_excel(writer, index=False)
+        df.to_excel('dataset/banco_dados.xlsx', index=False)
         
         st.success('Dados salvos com sucesso!')
     except Exception as e:
         st.error(f'Erro ao salvar dados: {e}')
+
 
 #função para excluir colaborador
 def excluir_colaborador(cpf_colaborador):
