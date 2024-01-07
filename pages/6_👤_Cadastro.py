@@ -66,12 +66,17 @@ def criar_banco_dados(dados):
 
 def criar_banco_dados(dados):
     try:
+        # Tenta ler o arquivo existente
         try:
             df = pd.read_excel('dataset/banco_dados.xlsx')
         except FileNotFoundError:
             df = pd.DataFrame(columns=['COLABORADOR', 'CPF', 'PIS'])
 
-        df = df.append(pd.DataFrame(dados), ignore_index=True)
+        # Adiciona os novos dados ao DataFrame
+        novo_df = pd.DataFrame(dados)
+        df = pd.concat([df, novo_df], ignore_index=True)
+
+        # Salva o DataFrame atualizado no arquivo Excel
         df.to_excel('dataset/banco_dados.xlsx', index=False)
         st.success('Dados salvos com sucesso!')
     except Exception as e:
