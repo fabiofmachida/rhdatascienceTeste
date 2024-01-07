@@ -49,7 +49,9 @@ def criar_banco_dados(dados):
         df = pd.concat([df, novo_df], ignore_index=True)
 
         # Salva o DataFrame atualizado no arquivo Excel
-        df.to_excel('dataset/banco_dados.xlsx', index=False)
+        with pd.ExcelWriter('dataset/banco_dados.xlsx', engine='openpyxl') as writer:
+            df.to_excel(writer, index=False)
+        
         st.success('Dados salvos com sucesso!')
     except Exception as e:
         st.error(f'Erro ao salvar dados: {e}')
