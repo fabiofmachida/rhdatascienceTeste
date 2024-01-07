@@ -66,15 +66,12 @@ def criar_banco_dados(dados):
 
 def criar_banco_dados(dados):
     try:
-        df = pd.read_excel('dataset/banco_dados.xlsx')
-        df = df.append(dados, ignore_index=True)
-    except FileNotFoundError:
-        df = pd.DataFrame(dados, columns=['CPF', 'PIS', 'COLABORADOR'])
-    
-    # Remover aspas e colchetes dos valores
-    df = df.applymap(lambda x: x[0] if isinstance(x, list) else x)
-    
-    try:
+        try:
+            df = pd.read_excel('dataset/banco_dados.xlsx')
+        except FileNotFoundError:
+            df = pd.DataFrame(columns=['COLABORADOR', 'CPF', 'PIS'])
+
+        df = df.append(pd.DataFrame(dados), ignore_index=True)
         df.to_excel('dataset/banco_dados.xlsx', index=False)
         st.success('Dados salvos com sucesso!')
     except Exception as e:
