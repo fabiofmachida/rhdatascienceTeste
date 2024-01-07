@@ -38,34 +38,6 @@ if uploaded_file is not None:
 #função para criar um banco de dados
 def criar_banco_dados(dados):
     try:
-        df = pd.read_excel('dataset/banco_dados.xlsx')
-        df = df.append(dados, ignore_index=True)
-    except FileNotFoundError:
-        df = pd.DataFrame(dados, columns=['CPF', 'PIS', 'COLABORADOR'])
-    
-    # Remover aspas e colchetes dos valores
-    df = df.applymap(lambda x: x[0] if isinstance(x, list) else x)
-    
-    df.to_excel('dataset/banco_dados.xlsx', index=False)
-
-#def criar_banco_dados(dados):
-#   try:
-#       df = pd.read_excel('dataset/banco_dados.xlsx')
-#        df = df.append(dados, ignore_index=True)
- #   except FileNotFoundError:
-  #      df = pd.DataFrame(dados, columns=['CPF', 'PIS', 'COLABORADOR'])
-   # 
-    ## Remover aspas e colchetes dos valores
-    #df = df.applymap(lambda x: x[0] if isinstance(x, list) else x)
-    
-    #try:
-    #    df.to_excel('dataset/banco_dados.xlsx', index=False)
-     #   st.success('Dados salvos com sucesso!')
-    #except Exception as e:
-     #   st.error(f'Erro ao salvar dados: {e}')
-
-def criar_banco_dados(dados):
-    try:
         # Tenta ler o arquivo existente
         try:
             df = pd.read_excel('dataset/banco_dados.xlsx')
