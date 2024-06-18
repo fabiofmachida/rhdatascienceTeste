@@ -66,7 +66,7 @@ st.markdown(
     ### Suporte
     - Consultar a Administração:
         - @LeonardoDelVechio
-        - @IvoneSantos
+        - @GabrielJunior
     
 """)
 
